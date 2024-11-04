@@ -30,9 +30,11 @@ password_label.grid(row=3, column=0)
 
 website_entry = Entry(width=35)
 website_entry.grid(row=1, column=1, columnspan=2)
+website_entry.focus()
 
 username_entry = Entry(width=35)
 username_entry.grid(row=2, column=1, columnspan=2)
+username_entry.insert(END, "taranpatel1006@gmail.com")
 
 password_entry = Entry(width=18)
 password_entry.grid(row=3, column=1)
