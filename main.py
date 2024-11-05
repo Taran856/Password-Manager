@@ -19,7 +19,6 @@ def save():
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=20)
-# data = open("data.txt", "x")
 
 # Canvas
 canvas = Canvas(width=200, height=200)
