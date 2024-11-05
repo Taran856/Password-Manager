@@ -5,13 +5,17 @@ from tkinter import *
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
+    # Creating the text file we want to save our info in
     data = open("data.txt", "a")
     data.write(f"{website_entry.get()} | {username_entry.get()} | {password_entry.get()}\n")
+
+    # Deleting the entries for website and the password
     website_entry.delete(0, END)
     password_entry.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
+# Creating the window
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=20)
