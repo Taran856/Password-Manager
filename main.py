@@ -1,3 +1,4 @@
+import json
 from tkinter import *
 from tkinter import messagebox
 import random
@@ -41,26 +42,31 @@ def generate_pass():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
+
+    new_data = {
+        website_entry.get(): {
+            "email": username_entry.get(),
+            "password": password_entry.get()
+        }
+    }
     # Error handling if the password or website fields are empty
     if len(website_entry.get()) == 0 or len(password_entry.get()) == 0:
         messagebox.showinfo(title="Oops", message="Please don't leave any fields empty!")
 
     else:
 
-        # Double-checking with the user if he wants to save the info or make changes to it.
-        is_ok = messagebox.askokcancel(title=website_entry.get(), message=f"These are the details entered: "
-                                                                          f"\nEmail: {username_entry.get()} "
-                                                                          f"\nPassword: {password_entry.get()} \nIs it of to save?")
+        # Creating the text file we want to save our info in
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+            data.update(new_data)
 
-        #  If the user chooses ok
-        if is_ok:
-            # Creating the text file we want to save our info in
-            data = open("data.txt", "a")
-            data.write(f"{website_entry.get()} | {username_entry.get()} | {password_entry.get()}\n")
+        with open("data.json", "w") as data_file:
+            json.dump(data, data_file, indent=4)
 
-            # Deleting the entries for website and the password
-            website_entry.delete(0, END)
-            password_entry.delete(0, END)
+
+        # Deleting the entries for website and the password
+        website_entry.delete(0, END)
+        password_entry.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
