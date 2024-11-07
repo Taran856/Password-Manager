@@ -42,7 +42,6 @@ def generate_pass():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
-
     new_data = {
         website_entry.get(): {
             "email": username_entry.get(),
@@ -62,7 +61,6 @@ def save():
 
         with open("data.json", "w") as data_file:
             json.dump(data, data_file, indent=4)
-
 
         # Deleting the entries for website and the password
         website_entry.delete(0, END)
