@@ -58,6 +58,7 @@ def save():
             with open("data.json", "r") as data_file:
                 # Reading the json file
                 data = json.load(data_file)
+
                 # Update the json file
                 data.update(new_data)
 
@@ -75,6 +76,26 @@ def save():
             # Deleting the entries for website and the password
             website_entry.delete(0, END)
             password_entry.delete(0, END)
+
+
+# ---------------------------- Find Password ------------------------------- #
+
+def find_password():
+    try:
+        with open("data.json", "r") as data_file:
+            # Reading the json file
+            data = json.load(data_file)
+
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops", message="No Data File Found")
+
+    else:
+        try:
+            messagebox.showinfo(title="Website Credential",
+                                message=f"Website: {website_entry.get()}\nPassword: {data[website_entry.get()]}")
+
+        except:
+            messagebox.showinfo(title="Oops", message="No details for the website found")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -102,8 +123,8 @@ password_label.grid(row=3, column=0)
 
 # Inputs
 
-website_entry = Entry(width=35)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry = Entry(width=18)
+website_entry.grid(row=1, column=1)
 website_entry.focus()
 
 username_entry = Entry(width=35)
@@ -115,7 +136,10 @@ password_entry.grid(row=3, column=1)
 
 # Buttons
 
-generate_button = Button(text="Generate Password", command=generate_pass)
+search_button = Button(text="Search", command=find_password, width=13)
+search_button.grid(column=2, row=1)
+
+generate_button = Button(text="Generate Password", command=generate_pass, width=13)
 generate_button.grid(column=2, row=3)
 
 add_button = Button(text="Add", width=35, command=save)
